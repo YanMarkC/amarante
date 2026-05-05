@@ -6,7 +6,7 @@ import { auth } from "../firebase/firebaseConfig";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../redux/store";
 
-// ✅ Optional: type navigation (basic version)
+
 type Props = {
   navigation: any;
 };

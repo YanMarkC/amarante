@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { auth } from "../firebase/firebaseConfig";
 
-// ✅ Basic navigation typing (simple version for now)
+
 type Props = {
   navigation: any;
 };
