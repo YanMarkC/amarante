@@ -1,10 +1,17 @@
-import React from 'react';
-import { Text, View } from 'react-native';
 
+import React from 'react'
+import { NavigationContainer } from "@react-navigation/native";
+import { Provider } from "react-redux";
+import { store } from "./src/redux/store";
+import AppNavigator from "./src/navigation/AppNavigator";
+
+// export default function App(): JSX.Element {
 export default function App() {
   return (
-    <View>
-      <Text>Fresh App Working</Text>
-    </View>
+    <Provider store={store}>
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
+    </Provider>
   );
 }
