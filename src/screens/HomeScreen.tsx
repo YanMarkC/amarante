@@ -1,11 +1,10 @@
-
-
 import { signOut } from "firebase/auth";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { auth } from "../firebase/firebaseConfig";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../redux/store";
 
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 type Props = {
   navigation: any;
@@ -16,11 +15,20 @@ export default function HomeScreen({ navigation }: Props) {
 
   const handleLogout = async (): Promise<void> => {
     try {
+
+      // Firebase logout
       await signOut(auth);
+
+      // Google logout
+      await GoogleSignin.signOut();
+
+      // Optional: remove cached account completely
+      //await GoogleSignin.revokeAccess();
 
       dispatch({ type: "LOGOUT" });
 
       console.log("LOGOUT SUCCESS");
+
     } catch (error: unknown) {
       console.log("LOGOUT FAILED", error);
     }

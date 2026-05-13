@@ -1,7 +1,15 @@
 
+import {
+  signInWithEmailAndPassword,
+  UserCredential,
+  GoogleAuthProvider,
+  signInWithCredential,
+} from "firebase/auth";
 
-import { signInWithEmailAndPassword, UserCredential } from "firebase/auth";
-import { useState } from "react";
+import { 
+  useState, 
+  useEffect 
+} from "react";
 import {
   Alert,
   StyleSheet,
@@ -17,7 +25,7 @@ import {
   statusCodes,
 } from "@react-native-google-signin/google-signin";
 
-import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+
 
 
 type Props = {
@@ -28,10 +36,12 @@ export default function LoginScreen({ navigation }: Props) {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-GoogleSignin.configure({
-  webClientId:
-    "664295491127-lr8fq0e8tl1hbt8b9rro2gsgqbuvclld.apps.googleusercontent.com",
-});
+useEffect(() => {
+  GoogleSignin.configure({
+    webClientId:
+      "664295491127-lr8fq0e8tl1hbt8b9rro2gsgqbuvclld.apps.googleusercontent.com",
+  });
+}, []);
 
 
   const handleLogin = async (): Promise<void> => {
@@ -138,14 +148,19 @@ const handleGoogleLogin = async (): Promise<void> => {
         <Text style={styles.linkText}>Sign Up</Text>
       </TouchableOpacity>
 
-      //Google sign in button
+      <Text>or</Text>
+
+
+      {/* ----------------Google sign in button---------------- */}
+
+
 
       <TouchableOpacity
         onPress={handleGoogleLogin}
         style={styles.googleButton}
       >
         <Text style={styles.buttonText}>
-          Sign In with Google
+          Continue with Google
         </Text>
       </TouchableOpacity>
 
@@ -181,6 +196,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderWidth: 1,
     borderColor: "#ccc",
+    
   },
 
   loginButton: {
