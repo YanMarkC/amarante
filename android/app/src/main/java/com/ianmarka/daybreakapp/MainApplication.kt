@@ -1,4 +1,4 @@
-package com.freshapp
+package com.ianmarka.daybreakapp;
 
 import android.app.Application
 import com.facebook.react.PackageList

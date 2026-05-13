@@ -1,4 +1,4 @@
-package com.freshapp
+package com.ianmarka.daybreakapp;
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
