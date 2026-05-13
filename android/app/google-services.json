@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "664295491127",
+    "project_id": "react-native-auth-app-bad6e",
+    "storage_bucket": "react-native-auth-app-bad6e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664295491127:android:3f48ad855bcae8595221b2",
+        "android_client_info": {
+          "package_name": "com.ianmarka.daybreakapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664295491127-qqcbd248abkfltl0a4u5b0ljtp3nm405.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ianmarka.daybreakapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "664295491127-lr8fq0e8tl1hbt8b9rro2gsgqbuvclld.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVU1yJb8phrax7-lQYsxwTEPccZHLg6M8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664295491127-lr8fq0e8tl1hbt8b9rro2gsgqbuvclld.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

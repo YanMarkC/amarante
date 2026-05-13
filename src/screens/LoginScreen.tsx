@@ -12,6 +12,13 @@ import {
 } from "react-native";
 import { auth } from "../firebase/firebaseConfig";
 
+import {
+  GoogleSignin,
+  statusCodes,
+} from "@react-native-google-signin/google-signin";
+
+import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+
 
 type Props = {
   navigation: any;
@@ -20,6 +27,12 @@ type Props = {
 export default function LoginScreen({ navigation }: Props) {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+GoogleSignin.configure({
+  webClientId:
+    "664295491127-lr8fq0e8tl1hbt8b9rro2gsgqbuvclld.apps.googleusercontent.com",
+});
+
 
   const handleLogin = async (): Promise<void> => {
     if (!email || !password) {
@@ -40,6 +53,61 @@ export default function LoginScreen({ navigation }: Props) {
       Alert.alert("Login Failed", "Invalid credentials");
     }
   };
+
+const handleGoogleLogin = async (): Promise<void> => {
+  try {
+    // Check Google Play Services
+    await GoogleSignin.hasPlayServices();
+
+    // Start sign in
+    const userInfo = await GoogleSignin.signIn();
+
+    // Get ID token
+    const idToken = userInfo.data?.idToken;
+
+    if (!idToken) {
+      Alert.alert("Google Sign In Failed", "No ID token found");
+      return;
+    }
+
+    // Create Firebase credential
+    const googleCredential =
+      GoogleAuthProvider.credential(idToken);
+
+    // Sign in to Firebase
+    const userCredential = await signInWithCredential(
+      auth,
+      googleCredential
+    );
+
+    console.log(
+      "GOOGLE LOGIN SUCCESS",
+      userCredential.user
+    );
+
+  } catch (error: any) {
+    console.log("GOOGLE LOGIN ERROR", error);
+
+    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+      Alert.alert("Cancelled", "Google sign in cancelled");
+    } else if (
+      error.code === statusCodes.IN_PROGRESS
+    ) {
+      Alert.alert("Loading", "Sign in already in progress");
+    } else if (
+      error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE
+    ) {
+      Alert.alert(
+        "Error",
+        "Google Play Services not available"
+      );
+    } else {
+      Alert.alert("Error", "Google Sign In Failed");
+    }
+  }
+};
+
+
 
   return (
     <View style={styles.container}>
@@ -69,8 +137,22 @@ export default function LoginScreen({ navigation }: Props) {
       <TouchableOpacity onPress={() => navigation.navigate("Register")}>
         <Text style={styles.linkText}>Sign Up</Text>
       </TouchableOpacity>
+
+      //Google sign in button
+
+      <TouchableOpacity
+        onPress={handleGoogleLogin}
+        style={styles.googleButton}
+      >
+        <Text style={styles.buttonText}>
+          Sign In with Google
+        </Text>
+      </TouchableOpacity>
+
     </View>
   );
+
+  
 }
 
 // Styles-------------------------------------------------------------------------------------------------------
@@ -120,4 +202,13 @@ const styles = StyleSheet.create({
     color: "#1976d2",
     fontSize: 16,
   },
+
+  googleButton: {
+  backgroundColor: "#db4437",
+  width: "100%",
+  padding: 15,
+  borderRadius: 8,
+  alignItems: "center",
+  marginBottom: 15,
+},
 });
