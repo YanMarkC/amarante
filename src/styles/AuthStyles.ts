@@ -56,7 +56,7 @@ export const styles = StyleSheet.create({
   },
 
   googleButton: {
-    backgroundColor: "#ede4e4",
+    backgroundColor: "#e25e5e",
     width: "100%",
     padding: 15,
     borderRadius: 8,
