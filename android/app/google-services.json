@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "664295491127-igc74fkuafrrnpqtfgjrcmn9blcsf3fv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ianmarka.daybreakapp",
+            "certificate_hash": "d667001102af01b44b20a1388e323bc22fef8e51"
+          }
+        },
+        {
           "client_id": "664295491127-qqcbd248abkfltl0a4u5b0ljtp3nm405.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
