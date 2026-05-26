@@ -11,6 +11,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ImageBackground,
 } from "react-native";
 
 import { auth } from "../firebase/firebaseConfig";
@@ -19,6 +20,8 @@ import { styles } from "../styles/AuthStyles";
 
 import CustomTextInput from "../components/CustomTextInput";
 
+const backgroundImage = require("../assets/images/background.jpg");
+
 type Props = {
   navigation: any;
 };
@@ -26,17 +29,20 @@ type Props = {
 export default function RegisterScreen({
   navigation,
 }: Props) {
+
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const handleRegister = async (): Promise<void> => {
+
     if (!name || !email || !password) {
       Alert.alert("Error", "All fields are required");
       return;
     }
 
     try {
+
       const userCredential: UserCredential =
         await createUserWithEmailAndPassword(
           auth,
@@ -54,11 +60,13 @@ export default function RegisterScreen({
       navigation.navigate("Login");
 
     } catch (error: unknown) {
+
       const err = error as AuthError;
 
       console.log("REGISTER FAILED", err.code);
 
       if (err.code === "auth/email-already-in-use") {
+
         Alert.alert(
           "Register Failed",
           "Email already in use"
@@ -67,6 +75,7 @@ export default function RegisterScreen({
       } else if (
         err.code === "auth/invalid-email"
       ) {
+
         Alert.alert(
           "Register Failed",
           "Invalid email format"
@@ -75,12 +84,14 @@ export default function RegisterScreen({
       } else if (
         err.code === "auth/weak-password"
       ) {
+
         Alert.alert(
           "Register Failed",
           "Password must be at least 6 characters"
         );
 
       } else {
+
         Alert.alert(
           "Register Failed",
           err.message
@@ -90,47 +101,79 @@ export default function RegisterScreen({
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        Register
-      </Text>
 
-      <CustomTextInput
-        placeholder="User Name"
-        value={name}
-        onChangeText={(text: string) =>
-          setName(text)
-        }
-        inputStyle={styles.input}
-      />
+    <ImageBackground
+      source={backgroundImage}
+      style={styles.background}
+      resizeMode="cover"
+      blurRadius={3}
+    >
 
-      <CustomTextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={(text: string) =>
-          setEmail(text)
-        }
-        inputStyle={styles.input}
-      />
+      <View style={styles.overlay}>
 
-      <CustomTextInput
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={(text: string) =>
-          setPassword(text)
-        }
-        inputStyle={styles.input}
-      />
+        <View style={styles.container}>
 
-      <TouchableOpacity
-        onPress={handleRegister}
-        style={styles.registerButton}
-      >
-        <Text style={styles.buttonText}>
-          Register
-        </Text>
-      </TouchableOpacity>
-    </View>
+          <Text style={styles.title}>
+            Register
+          </Text>
+
+          <CustomTextInput
+            placeholder="User Name"
+            value={name}
+            onChangeText={(text: string) =>
+              setName(text)
+            }
+            inputStyle={styles.input}
+          />
+
+          <CustomTextInput
+            placeholder="Email"
+            value={email}
+            onChangeText={(text: string) =>
+              setEmail(text)
+            }
+            inputStyle={styles.input}
+          />
+
+          <CustomTextInput
+            placeholder="Password"
+            secureTextEntry
+            value={password}
+            onChangeText={(text: string) =>
+              setPassword(text)
+            }
+            inputStyle={styles.input}
+          />
+
+          <TouchableOpacity
+            onPress={handleRegister}
+            style={styles.registerButton}
+          >
+
+            <Text style={styles.buttonText}>
+              Register
+            </Text>
+
+          </TouchableOpacity>
+
+          <Text style={styles.normalText}>
+            Already have an account?
+          </Text>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Login")}
+          >
+
+            <Text style={styles.linkText}>
+              Login
+            </Text>
+
+          </TouchableOpacity>
+
+        </View>
+
+      </View>
+
+    </ImageBackground>
   );
 }

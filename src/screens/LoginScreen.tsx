@@ -16,6 +16,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ImageBackground,
 } from "react-native";
 
 import CustomTextInput from "../components/CustomTextInput";
@@ -29,7 +30,7 @@ import {
   statusCodes,
 } from "@react-native-google-signin/google-signin";
 
-
+const backgroundImage = require("../assets/images/background.jpg");
 
 
 type Props = {
@@ -124,51 +125,62 @@ const handleGoogleLogin = async (): Promise<void> => {
 
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Daybreak</Text>
+  <ImageBackground
+    source={backgroundImage}
+    style={styles.background}
+    resizeMode="cover"
+    blurRadius={3}
+  >
+    {/* Dark overlay */}
+    <View style={styles.overlay}>
 
-      <CustomTextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={(text: string) => setEmail(text)}
-      />
+      <View style={styles.container}>
+        <Text style={styles.title}>Daybreak</Text>
 
-      <CustomTextInput
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={(text: string) => setPassword(text)}
-      />
+        <CustomTextInput
+          placeholder="Email"
+          value={email}
+          onChangeText={(text: string) => setEmail(text)}
+        />
 
-      <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+        <CustomTextInput
+          placeholder="Password"
+          secureTextEntry
+          value={password}
+          onChangeText={(text: string) => setPassword(text)}
+        />
 
-      <Text>Don't have an account?</Text>
-
-      <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-        <Text style={styles.linkText}>Sign Up</Text>
-      </TouchableOpacity>
-
-      <Text>or</Text>
-
-
-      {/* ----------------Google sign in button---------------- */}
-
-
-
-      <TouchableOpacity
-        onPress={handleGoogleLogin}
-        style={styles.googleButton}
+        <TouchableOpacity
+          onPress={handleLogin}
+          style={styles.loginButton}
         >
-        <Text style={styles.buttonText}>
-          Continue with Google
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.normalText}>
+          Don't have an account?
         </Text>
-      </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Register")}
+        >
+          <Text style={styles.linkText}>Sign Up</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.normalText}>or</Text>
+
+        <TouchableOpacity
+          onPress={handleGoogleLogin}
+          style={styles.googleButton}
+        >
+          <Text style={styles.buttonText}>
+            Continue with Google
+          </Text>
+        </TouchableOpacity>
+      </View>
 
     </View>
-  );
-
-  
+  </ImageBackground>
+);
 }
 
