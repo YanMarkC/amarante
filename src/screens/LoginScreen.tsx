@@ -25,6 +25,10 @@ import { auth } from "../firebase/firebaseConfig";
 
 import { styles } from "../styles/AuthStyles";
 
+//import FontAwesome from "react-native-vector-icons/FontAwesome";
+
+import FontAwesome from "@react-native-vector-icons/fontawesome";
+
 import {
   GoogleSignin,
   statusCodes,
@@ -173,9 +177,18 @@ const handleGoogleLogin = async (): Promise<void> => {
           onPress={handleGoogleLogin}
           style={styles.googleButton}
         >
+
+          <FontAwesome
+            name="google"
+            size={20}
+            color="#fff"
+            style={styles.googleIcon}
+          />
+
           <Text style={styles.buttonText}>
             Continue with Google
           </Text>
+
         </TouchableOpacity>
       </View>
 

@@ -88,16 +88,18 @@ export const styles = StyleSheet.create({
   },
 
   googleButton: {
-    backgroundColor: "#e25e5e",
-    width: "100%",
-    padding: 15,
-    borderRadius: 12,
-    alignItems: "center",
-    marginBottom: 15,
+  backgroundColor: "#c5c5c5",
+  width: "100%",
+  padding: 15,
+  borderRadius: 12,
+  alignItems: "center",
+  justifyContent: "center",
+  flexDirection: "row",
+  marginBottom: 15,
   },
 
   logoutButton: {
-    backgroundColor: "#e53935",
+    backgroundColor: "#c83939",
     padding: 15,
     borderRadius: 12,
     width: "70%",
@@ -109,6 +111,10 @@ export const styles = StyleSheet.create({
     color: "#ffffff",
     fontWeight: "bold",
     fontSize: 16,
+  },
+
+  googleIcon: {
+  marginRight: 10,
   },
 
 });
